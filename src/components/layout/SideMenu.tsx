@@ -19,7 +19,6 @@ const SideMenuComponent = styled.nav<ToggleProps>`
   flex-direction: column;
   width: 100%;
   height: 3rem;
-  transition: height 0.2s ease-in, ${THEME_TRANSITION};
 
   ${({ expanded }) =>
     expanded
