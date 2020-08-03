@@ -13,4 +13,9 @@ module.exports = merge(common, {
     clientLogLevel: 'silent',
     historyApiFallback: true,
   },
+  output: {
+    filename: '[name].[contenthash].js',
+    path: path.resolve(__dirname, '..', 'dist'),
+    publicPath: '/',
+  },
 });

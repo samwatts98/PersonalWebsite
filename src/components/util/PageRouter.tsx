@@ -8,8 +8,8 @@ import { Home } from 'components/pages/Home';
 import { IconType } from 'react-icons/lib';
 import { ReactElement } from 'react';
 import { HasChildren } from 'types/common';
-import { Projects } from './Projects';
-import { Contact } from './Contact';
+import { Projects } from '../pages/Projects';
+import { Contact } from '../pages/Contact';
 
 export interface PageLinkProps {
   MenuIcon: IconType;
