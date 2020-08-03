@@ -4,7 +4,7 @@ import { GlobalStyle } from 'components/layout/GlobalStyle';
 import { PageRouter } from 'components/pages/PageRouter';
 import MainLayout from 'components/layout/MainLayout';
 import { Light, Dark } from 'components/common/Themes';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 
 function App(): React.ReactElement {
   const [darkMode, setDarkMode] = React.useState(false);
@@ -16,11 +16,11 @@ function App(): React.ReactElement {
   return (
     <ThemeProvider theme={darkMode ? Dark : Light}>
       <GlobalStyle />
-      <BrowserRouter>
+      <HashRouter>
         <MainLayout darkMode={darkMode} handleDarkModeChange={handleThemeChange}>
           <PageRouter />
         </MainLayout>
-      </BrowserRouter>
+      </HashRouter>
     </ThemeProvider>
   );
 }
