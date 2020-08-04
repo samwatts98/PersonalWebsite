@@ -14,7 +14,6 @@ const SideMenuComponent = styled.nav<ToggleProps>`
   display: flex;
   position: fixed;
   padding: 1rem;
-
   top: 0;
   flex-direction: column;
   width: 100%;
@@ -86,7 +85,6 @@ const SideMenuItemComponent = styled(Link)`
 `;
 
 const ToggleMenu = styled.button`
-  /* margin: auto 0 auto auto; */
   background-color: Transparent;
   border: none;
   outline: none;
@@ -94,16 +92,16 @@ const ToggleMenu = styled.button`
   height: min-content;
   justify-self: center;
   padding-left: 0.5rem;
-  p {
+  svg {
     margin: 0.5rem 0;
   }
 `;
 
-function SideMenuItem({ MenuIcon, text, to }: PageLinkProps): React.ReactElement {
+function SideMenuItem({ MenuIcon, text, to, onClick }: PageLinkProps & { onClick: () => void }): React.ReactElement {
   return (
-    <SideMenuItemComponent to={to} aria-label={text}>
+    <SideMenuItemComponent to={to} aria-label={text} onClick={onClick}>
       <p className="menuIcon">
-        <MenuIcon size={'2rem'} />
+        <MenuIcon />
       </p>
       <h2 className="menuItemName">{text}</h2>
     </SideMenuItemComponent>
@@ -112,19 +110,17 @@ function SideMenuItem({ MenuIcon, text, to }: PageLinkProps): React.ReactElement
 
 export function SideMenu({ children }: HasChildren): React.ReactElement {
   const [expanded, setExpanded] = useState(false);
-  const handleClick = (): void => {
+  const onClick = (): void => {
     setExpanded((e) => !e);
   };
   return (
     <SideMenuComponent expanded={expanded}>
-      <ToggleMenu onClick={handleClick} className="menuToggle">
-        <p>
-          <FiMenu size={'2rem'} />
-        </p>
+      <ToggleMenu onClick={onClick} className="menuToggle" aria-label="toggle menu">
+        <FiMenu />
       </ToggleMenu>
       {children}
       {pageLinks.map((link) => (
-        <SideMenuItem key={link.text} {...link} />
+        <SideMenuItem key={link.text} {...link} onClick={onClick} />
       ))}
     </SideMenuComponent>
   );

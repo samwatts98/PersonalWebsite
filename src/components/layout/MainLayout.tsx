@@ -5,6 +5,7 @@ import { FiMoon, FiSun } from 'react-icons/fi';
 import { SideMenu } from 'components/layout/SideMenu';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, THEME_TRANSITION, DESKTOP_MEDIA_QUERY } from 'components/layout/GlobalStyle';
+import { IconContext } from 'react-icons';
 
 type MainLayoutProps = {
   children?: React.ReactNode;
@@ -23,16 +24,13 @@ const MainSection = styled.main`
 const ThemeToggle = styled.button`
   position: absolute;
   right: 3rem;
-  background-color: Transparent;
-  border: none;
-  outline: none;
   transition: transform 0.1s ease-in, ${THEME_TRANSITION};
-  width: min-content;
-  height: min-content;
+
   margin: 0.5rem;
   ${DESKTOP_MEDIA_QUERY} {
     padding: 0.5rem 0;
-
+    width: min-content;
+    height: min-content;
     position: static;
   }
 
@@ -51,17 +49,19 @@ const MainLayout = ({ children }: MainLayoutProps): React.ReactElement => {
     setDarkMode((dm) => !dm);
   };
 
-  const PickThemeIcon = (): React.ReactElement => (darkMode ? <FiMoon size={'2rem'} /> : <FiSun size={'2rem'} />);
+  const PickThemeIcon = (): React.ReactElement => (darkMode ? <FiMoon /> : <FiSun />);
 
   return (
     <ThemeProvider theme={darkMode ? Dark : Light}>
-      <GlobalStyle />
-      <SideMenu>
-        <ThemeToggle onClick={handleThemeChange}>
-          <PickThemeIcon />
-        </ThemeToggle>
-      </SideMenu>
-      <MainSection>{children}</MainSection>
+      <IconContext.Provider value={{ size: '2rem' }}>
+        <GlobalStyle />
+        <SideMenu>
+          <ThemeToggle onClick={handleThemeChange} aria-label="toggle theme">
+            <PickThemeIcon />
+          </ThemeToggle>
+        </SideMenu>
+        <MainSection>{children}</MainSection>
+      </IconContext.Provider>
     </ThemeProvider>
   );
 };

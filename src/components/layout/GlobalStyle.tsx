@@ -15,10 +15,14 @@ export const GlobalStyle = createGlobalStyle`
     transition: ${THEME_TRANSITION};
   }
   button, a {
+    
+    border: none;
+    outline: none;
+    background: transparent;
+    transition: ${THEME_TRANSITION};
     color: ${(props) => props.theme.textColour};
     &:active {
       background-color: ${(props) => props.theme.ternaryColour};
     }
-    transition: ${THEME_TRANSITION};
   }
 `;
