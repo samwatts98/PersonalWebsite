@@ -19,9 +19,28 @@
     "noEmit": true,
     "jsx": "react",
     "sourceMap": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "components/*": [
+        "src/components/*"
+      ],
+      "css/*": [
+        "src/css/*"
+      ],
+      "types/*": [
+        "src/types/*"
+      ],
+      "assets/*": [
+        "public/assets/*"
+      ],
+      "App": [
+        "src/App.tsx"
+      ],
+    }
   },
   "include": [
-    "src"
+    "src",
+    "public",
+    "global.d.ts"
   ]
 }

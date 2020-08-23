@@ -1,9 +1,15 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from 'App';
+import renderer from 'react-test-renderer';
+import { ToggleThemeButton } from 'components/layout/ToggleThemeButton';
+import { FiHome, FiCode } from 'react-icons/fi';
 
-test('existence test', () => {
-  const { getByText } = render(<App />);
-  const titleElement = getByText(/Hello World!/i);
-  expect(titleElement).toBeInTheDocument();
+it('renders', () => {
+  let icon = FiHome;
+  const getIcon = () => {
+    icon = icon === FiHome ? FiCode : FiHome;
+  };
+
+  const tree = renderer.create(<ToggleThemeButton handleClick={getIcon} Icon={icon} />);
+  expect(tree).toMatchSnapshot();
 });
+'';

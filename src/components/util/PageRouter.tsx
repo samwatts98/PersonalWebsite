@@ -7,7 +7,6 @@ import { Photography } from 'components/pages/Photography';
 import { Home } from 'components/pages/Home';
 import { IconType } from 'react-icons/lib';
 import { ReactElement } from 'react';
-import { HasChildren } from 'types/common';
 import { Projects } from '../pages/Projects';
 import { Contact } from '../pages/Contact';
 
@@ -15,13 +14,14 @@ export interface PageLinkProps {
   MenuIcon: IconType;
   text: string;
   to: string;
-  Page: (props: HasChildren) => ReactElement;
+  Page: (props: { children?: React.ReactNode }) => ReactElement;
 }
 export const pageLinks: Array<PageLinkProps> = [
   { text: 'Home', MenuIcon: FiHome, to: '/', Page: Home },
+  { text: 'Contact', MenuIcon: FiUser, to: '/contact', Page: Contact },
+
   { text: 'Photography', MenuIcon: FiCamera, to: '/photography', Page: Photography },
   { text: 'Projects', MenuIcon: FiCode, to: '/projects', Page: Projects },
-  { text: 'Contact', MenuIcon: FiUser, to: '/contact', Page: Contact },
 ];
 
 export const PageRouter = (): React.ReactElement => (

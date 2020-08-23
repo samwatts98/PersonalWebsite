@@ -25,7 +25,7 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['.ts', '.tsx', '.js'],
+    extensions: ['.ts', '.tsx', '.js', '.jpg'],
     modules: ["node_modules", path.resolve(__dirname, '..', 'src'), path.resolve(__dirname, '..', 'public')],
   },
 
@@ -41,6 +41,29 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(jpg|png|gif)$/,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive: true,
+                quality: 50
+              },
+            },
+          },
+        ],
+      },
+      // {
+      //   test: /\.(jpg|png|gif|svg)$/,
+      //   loader: 'image-webpack-loader',
+      //   // Specify enforce: 'pre' to apply the loader
+      //   // before url-loader/svg-url-loader
+      //   // and not duplicate it in rules with them
+      //   enforce: 'pre'
+      // }
     ],
   },
 

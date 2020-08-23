@@ -2,10 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Light, Dark } from 'components/common/Themes';
 import { FiMoon, FiSun } from 'react-icons/fi';
+import { IconType } from 'react-icons';
 import { SideMenu } from 'components/layout/SideMenu';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyle, THEME_TRANSITION, DESKTOP_MEDIA_QUERY } from 'components/layout/GlobalStyle';
+import { GlobalStyle, DESKTOP_MEDIA_QUERY } from 'components/layout/GlobalStyle';
 import { IconContext } from 'react-icons';
+import { ToggleThemeButton } from 'components/layout/ToggleThemeButton';
 
 type MainLayoutProps = {
   children?: React.ReactNode;
@@ -21,27 +23,6 @@ const MainSection = styled.main`
   }
 `;
 
-const ThemeToggle = styled.button`
-  position: absolute;
-  right: 3rem;
-  transition: transform 0.1s ease-in, ${THEME_TRANSITION};
-
-  margin: 0.5rem;
-  ${DESKTOP_MEDIA_QUERY} {
-    padding: 0.5rem 0;
-    width: min-content;
-    height: min-content;
-    position: static;
-  }
-
-  &:active {
-    background-color: Transparent;
-  }
-  &:hover {
-    transform: scale(1.4);
-  }
-`;
-
 const MainLayout = ({ children }: MainLayoutProps): React.ReactElement => {
   const [darkMode, setDarkMode] = React.useState(false);
 
@@ -49,16 +30,14 @@ const MainLayout = ({ children }: MainLayoutProps): React.ReactElement => {
     setDarkMode((dm) => !dm);
   };
 
-  const PickThemeIcon = (): React.ReactElement => (darkMode ? <FiMoon /> : <FiSun />);
+  const PickThemeIcon = (): IconType => (darkMode ? FiMoon : FiSun);
 
   return (
     <ThemeProvider theme={darkMode ? Dark : Light}>
       <IconContext.Provider value={{ size: '2rem' }}>
         <GlobalStyle />
         <SideMenu>
-          <ThemeToggle onClick={handleThemeChange} aria-label="toggle theme">
-            <PickThemeIcon />
-          </ThemeToggle>
+          <ToggleThemeButton handleClick={handleThemeChange} Icon={PickThemeIcon()} />
         </SideMenu>
         <MainSection>{children}</MainSection>
       </IconContext.Provider>

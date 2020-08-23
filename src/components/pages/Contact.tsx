@@ -1,5 +1,5 @@
 import React from 'react';
-import { Title } from 'components/Title';
+import { Title } from 'components/common/Title';
 import styled from 'styled-components';
 import { FiGithub, FiCodepen, FiLinkedin, FiInstagram, FiTwitter } from 'react-icons/fi';
 import { FaDev } from 'react-icons/fa';
@@ -60,7 +60,7 @@ const ContactSection = styled.section`
   margin: 0 auto;
   &:not(:last-child) {
     padding-bottom: 1rem;
-    border-bottom: black 1px solid;
+    border-bottom: ${(props) => props.theme.textColour} 1px solid;
   }
   ul {
     list-style: none;
@@ -73,7 +73,8 @@ const SocialMediaHandle = styled.h3`
 
 const SocialMediaPlatform = styled.a`
   display: block;
-  margin: 0.5rem auto;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   white-space: nowrap;
   svg {
     vertical-align: text-bottom;

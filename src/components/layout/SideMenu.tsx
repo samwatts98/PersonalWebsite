@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { pageLinks, PageLinkProps } from 'components/util/PageRouter';
 import { THEME_TRANSITION, DESKTOP_MEDIA_QUERY } from './GlobalStyle';
 import { Link } from 'react-router-dom';
-import { HasChildren } from 'types/common';
 import { FiMenu } from 'react-icons/fi';
 
 type ToggleProps = {
@@ -108,7 +107,7 @@ function SideMenuItem({ MenuIcon, text, to, onClick }: PageLinkProps & { onClick
   );
 }
 
-export function SideMenu({ children }: HasChildren): React.ReactElement {
+export function SideMenu({ children }: { children?: React.ReactNode }): React.ReactElement {
   const [expanded, setExpanded] = useState(false);
   const onClick = (): void => {
     setExpanded((e) => !e);
