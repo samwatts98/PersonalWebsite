@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Light, Dark } from 'components/common/Themes';
-import { FiMoon, FiSun } from 'react-icons/fi';
-import { IconType } from 'react-icons';
 import { SideMenu } from 'components/layout/SideMenu';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, DESKTOP_MEDIA_QUERY } from 'components/layout/GlobalStyle';
@@ -30,14 +28,12 @@ const MainLayout = ({ children }: MainLayoutProps): React.ReactElement => {
     setDarkMode((dm) => !dm);
   };
 
-  const PickThemeIcon = (): IconType => (darkMode ? FiMoon : FiSun);
-
   return (
     <ThemeProvider theme={darkMode ? Dark : Light}>
       <IconContext.Provider value={{ size: '2rem' }}>
         <GlobalStyle />
         <SideMenu>
-          <ToggleThemeButton handleClick={handleThemeChange} Icon={PickThemeIcon()} />
+          <ToggleThemeButton handleClick={handleThemeChange} darkMode={darkMode} />
         </SideMenu>
         <MainSection>{children}</MainSection>
       </IconContext.Provider>

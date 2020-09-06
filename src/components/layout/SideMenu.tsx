@@ -69,7 +69,8 @@ const SideMenuItemComponent = styled(Link)`
   }
 
   ${DESKTOP_MEDIA_QUERY} {
-    &:hover {
+    &:hover,
+    &:focus-visible {
       transform: translateX(1rem);
     }
     .menuItemName {

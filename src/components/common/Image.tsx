@@ -28,7 +28,7 @@ const ImageStyled = styled.img<InteractiveImage>`
   border-radius: 1rem;
   margin: auto;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   min-width: 100px;
   height: auto;
 

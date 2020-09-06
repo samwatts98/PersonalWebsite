@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { IconType } from 'react-icons/lib';
+import { FiMoon, FiSun } from 'react-icons/fi';
 
 import { DESKTOP_MEDIA_QUERY, THEME_TRANSITION } from './GlobalStyle';
 
@@ -20,20 +20,21 @@ const ToggleThemeButtonComponent = styled.button`
   &:active {
     background-color: Transparent;
   }
-  &:hover {
+  &:hover,
+  &:focus-visible {
     transform: scale(1.4);
   }
 `;
 
 type ToggleThemeButtonProps = {
   handleClick: () => void;
-  Icon: IconType;
+  darkMode: boolean;
 };
 
-export function ToggleThemeButton({ handleClick, Icon }: ToggleThemeButtonProps): React.ReactElement {
+export function ToggleThemeButton({ handleClick, darkMode }: ToggleThemeButtonProps): React.ReactElement {
   return (
-    <ToggleThemeButtonComponent onClick={handleClick}>
-      <Icon />
+    <ToggleThemeButtonComponent onClick={handleClick} aria-label="Toggle Dark Mode">
+      {darkMode ? <FiMoon /> : <FiSun />}
     </ToggleThemeButtonComponent>
   );
 }

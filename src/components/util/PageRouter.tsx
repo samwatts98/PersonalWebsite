@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { NoMatch } from 'components/pages/NoMatch';
-
 import { FiHome, FiUser, FiCode, FiCamera } from 'react-icons/fi';
 import { Photography } from 'components/pages/Photography';
 import { Home } from 'components/pages/Home';
@@ -19,7 +18,6 @@ export interface PageLinkProps {
 export const pageLinks: Array<PageLinkProps> = [
   { text: 'Home', MenuIcon: FiHome, to: '/', Page: Home },
   { text: 'Contact', MenuIcon: FiUser, to: '/contact', Page: Contact },
-
   { text: 'Photography', MenuIcon: FiCamera, to: '/photography', Page: Photography },
   { text: 'Projects', MenuIcon: FiCode, to: '/projects', Page: Projects },
 ];
@@ -27,7 +25,7 @@ export const pageLinks: Array<PageLinkProps> = [
 export const PageRouter = (): React.ReactElement => (
   <Switch>
     {pageLinks.map((link) => (
-      <Route exact path={link.to} key={link.to} component={link.Page} />
+      <Route exact path={link.to} key={link.to} component={link.Page} aria-label={link.text} />
     ))}
 
     <Route path="/404" component={NoMatch} />
