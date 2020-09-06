@@ -82,7 +82,7 @@ const SocialMediaPlatform = styled.a`
   }
 `;
 
-export function Contact(): React.ReactElement {
+function Contact(): React.ReactElement {
   return (
     <>
       <Title>Contact</Title>
@@ -115,3 +115,5 @@ export function Contact(): React.ReactElement {
     </>
   );
 }
+
+export default Contact;

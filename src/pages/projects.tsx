@@ -1,7 +1,7 @@
 import React from 'react';
 import { Title } from 'components/common/Title';
 
-export function Projects(): React.ReactElement {
+export default function Projects(): React.ReactElement {
   return (
     <>
       <Title>Projects</Title>

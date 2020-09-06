@@ -1,9 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import styled, { css } from 'styled-components';
 import React, { useState } from 'react';
-import { pageLinks, PageLinkProps } from 'components/util/PageRouter';
+import { pageLinks, PageLinkProps } from 'components/util/pageLinks';
 import { THEME_TRANSITION, DESKTOP_MEDIA_QUERY } from './GlobalStyle';
-import { Link } from 'react-router-dom';
 import { FiMenu } from 'react-icons/fi';
+import Link from 'next/link';
 
 type ToggleProps = {
   expanded: boolean;
@@ -42,6 +43,7 @@ const SideMenuComponent = styled.nav<ToggleProps>`
     &:hover {
       width: 15rem;
       .menuItemName {
+        font-weight: 400;
         opacity: 1;
         transition: opacity 0.2s ease-in 0.2s;
       }
@@ -52,7 +54,7 @@ const SideMenuComponent = styled.nav<ToggleProps>`
   }
 `;
 
-const SideMenuItemComponent = styled(Link)`
+const SideMenuItemComponent = styled.a`
   display: flex;
   align-items: baseline;
   background-color: Transparent;
@@ -97,14 +99,16 @@ const ToggleMenu = styled.button`
   }
 `;
 
-function SideMenuItem({ MenuIcon, text, to, onClick }: PageLinkProps & { onClick: () => void }): React.ReactElement {
+function SideMenuItem(props: PageLinkProps & { onClick: () => void }): React.ReactElement {
   return (
-    <SideMenuItemComponent to={to} aria-label={text} onClick={onClick}>
-      <p className="menuIcon">
-        <MenuIcon />
-      </p>
-      <h2 className="menuItemName">{text}</h2>
-    </SideMenuItemComponent>
+    <Link {...props} passHref>
+      <SideMenuItemComponent>
+        <p className="menuIcon">
+          <props.MenuIcon />
+        </p>
+        <h2 className="menuItemName">{props.text}</h2>
+      </SideMenuItemComponent>
+    </Link>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Title } from 'components/common/Title';
 
-export function Photography(): React.ReactElement {
+export default function Photography(): React.ReactElement {
   return (
     <>
       <Title>Photography</Title>
