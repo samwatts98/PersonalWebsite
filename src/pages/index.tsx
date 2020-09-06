@@ -8,7 +8,7 @@ function Home(): React.ReactElement {
     <>
       <Title>@samwatts98</Title>
       <Article>
-        <Image src={'/assets/me.jpg'} width="360" height="450" />
+        <Image src={'./assets/me.jpg'} width="360" height="450" />
         <p>
           Work in progress :) Made entirely from scratch in React, React Router, Redux, Styled-Components, Webpack, and
           Jest! This static-rendered website is built entirely from these modules, and does not depend on Next.JS

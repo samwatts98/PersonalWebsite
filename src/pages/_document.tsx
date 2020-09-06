@@ -4,27 +4,37 @@ import { ServerStyleSheet } from 'styled-components';
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext): Promise<DocumentInitialProps> {
-    const initialProps = await Document.getInitialProps(ctx);
-
+    const originalRenderPage = ctx.renderPage;
     const sheet = new ServerStyleSheet();
-    const page = ctx.renderPage((App) => (props) => sheet.collectStyles(<App {...props} />));
-    return {
-      ...page,
-      styles: (
-        <>
-          {initialProps.styles}
-          {sheet.getStyleElement()}
-        </>
-      ),
-    };
+
+    try {
+      ctx.renderPage = () =>
+        originalRenderPage({
+          // useful for wrapping the whole react tree
+          enhanceApp: (App) => (props) => sheet.collectStyles(<App {...props} />),
+        });
+      const initialProps = await Document.getInitialProps(ctx);
+      return {
+        ...initialProps,
+        styles: (
+          <>
+            {initialProps.styles}
+            {sheet.getStyleElement()}
+          </>
+        ),
+      };
+    } finally {
+      sheet.seal();
+    }
   }
 
   render(): React.ReactElement {
     return (
       <Html lang="en">
         <Head>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css" />
           <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
-          <title>Sam Watts</title>
+          {this.props.styles}
         </Head>
         <body>
           <Main />
